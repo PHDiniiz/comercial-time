@@ -1,6 +1,6 @@
 {
   "name": "@phdiniiz/comercial-time",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Biblioteca completa para gerenciamento de horários comerciais em português brasileiro. Inclui sistema de feriados nacionais/estaduais, validações de segurança, performance otimizada e suporte a múltiplos países (Brasil, Portugal, EUA). Implementada com Clean Architecture, TypeScript e ESM nativo.",
   "type": "module",
   "main": "dist/index.js",
