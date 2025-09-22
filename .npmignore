@@ -1,0 +1,57 @@
+# Arquivos de desenvolvimento
+tests/
+coverage/
+logs/
+examples/
+docs/
+*.test.ts
+*.spec.ts
+*.test.js
+*.spec.js
+
+# Arquivos de configuração de desenvolvimento
+tsconfig.json
+jest.config.js
+.gitignore
+.eslintrc*
+.prettierrc*
+.editorconfig
+
+# Arquivos de build e cache
+node_modules/
+*.log
+*.tgz
+*.tar.gz
+
+# Arquivos de documentação desnecessários
+CHANGELOG.md
+CONTRIBUTING.md
+ROADMAP.md
+EXECUTIVE_SUMMARY.md
+FAQ.md
+DOCUMENTATION_SUMMARY.md
+PROJECT_SUMMARY.md
+NPM_KEYWORDS.txt
+NPM_PACKAGE_DESCRIPTION.md
+PACKAGE_DESCRIPTION.txt
+
+# Arquivos de dados de desenvolvimento
+feriados.json
+ferramenta_pronta.tar.gz
+
+# Arquivos de configuração do sistema
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Arquivos de IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# Arquivos temporários
+tmp/
+temp/
+.tmp/
