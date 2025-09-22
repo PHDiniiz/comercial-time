@@ -1,6 +1,6 @@
 {
   "name": "@phdiniiz/comercial-time",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Biblioteca completa para gerenciamento de horários comerciais em português brasileiro. Inclui sistema de feriados nacionais/estaduais, validações de segurança, performance otimizada e suporte a múltiplos países (Brasil, Portugal, EUA). Implementada com Clean Architecture, TypeScript e ESM nativo.",
   "type": "module",
   "main": "dist/index.js",
@@ -58,13 +58,13 @@
   ],
   "author": "Pedro Henrique Diniz - github.com/phdiniz",
   "license": "MIT",
-  "homepage": "https://github.com/phdiniiz/comercialTime#readme",
+  "homepage": "https://github.com/PHDiniiz/phdiniiz-comercialTime#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/phdiniiz/comercialTime.git"
+    "url": "git+https://github.com/PHDiniiz/phdiniiz-comercialTime.git"
   },
   "bugs": {
-    "url": "https://github.com/phdiniiz/comercialTime/issues"
+    "url": "https://github.com/PHDiniiz/phdiniiz-comercialTime/issues"
   },
   "engines": {
     "node": ">=22.0.0"
