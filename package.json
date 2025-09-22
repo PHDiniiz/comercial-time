@@ -58,16 +58,16 @@
   ],
   "author": "Pedro Henrique Diniz - github.com/phdiniz",
   "license": "MIT",
-  "homepage": "https://github.com/PHDiniiz/phdiniiz-comercialTime#readme",
+  "homepage": "https://github.com/PHDiniiz/comercial-time#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PHDiniiz/phdiniiz-comercialTime.git"
+    "url": "git+https://github.com/PHDiniiz/comercial-time.git"
   },
   "bugs": {
-    "url": "https://github.com/PHDiniiz/phdiniiz-comercialTime/issues"
+    "url": "https://github.com/PHDiniiz/comercial-time/issues"
   },
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=20.0.0"
   },
   "files": [
     "dist",
