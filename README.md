@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![npm version](https://badge.fury.io/js/%40phdiniz%2FcomercialHours.svg)](https://badge.fury.io/js/%40phdiniz%2FcomercialHours)
+[![npm version](https://badge.fury.io/js/%40phdiniiz%2FcomercialTime.svg)](https://badge.fury.io/js/%40phdiniiz%2FcomercialTime)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D22.0.0-brightgreen.svg)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7.2-blue.svg)](https://www.typescriptlang.org/)
@@ -404,13 +404,13 @@ Contribuições são sempre bem-vindas! Veja como você pode ajudar:
 <div align="center">
 
 ### 📈 **Métricas**
-![GitHub stars](https://img.shields.io/github/stars/phdiniiz/comercialHours?style=social)
-![GitHub forks](https://img.shields.io/github/forks/phdiniz/comercialHours?style=social)
-![GitHub issues](https://img.shields.io/github/issues/phdiniz/comercialHours)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/phdiniz/comercialHours)
+![GitHub stars](https://img.shields.io/github/stars/phdiniiz/comercialTime?style=social)
+![GitHub forks](https://img.shields.io/github/forks/phdiniiz/comercialTime?style=social)
+![GitHub issues](https://img.shields.io/github/issues/phdiniiz/comercialTime)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/phdiniiz/comercialTime)
 
 ### 🏆 **Badges**
-[![npm version](https://badge.fury.io/js/%40phdiniz%2FcomercialHours.svg)](https://badge.fury.io/js/%40phdiniz%2FcomercialHours)
+[![npm version](https://badge.fury.io/js/%40phdiniiz%2FcomercialTime.svg)](https://badge.fury.io/js/%40phdiniiz%2FcomercialTime)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D22.0.0-brightgreen.svg)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7.2-blue.svg)](https://www.typescriptlang.org/)
@@ -425,7 +425,7 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 **Pedro Henrique Diniz**
 
-- 🌐 **GitHub**: [@PHDiniiz](https://github.com/PHDiniiz)
+- 🌐 **GitHub**: [@phdiniiz](https://github.com/phdiniiz)
 - 📦 **NPM**: [@phdiniiz/comercialTime](https://www.npmjs.com/package/@phdiniiz/comercialTime)
 
 ## 🙏 Agradecimentos
@@ -438,8 +438,8 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 ## 📞 Suporte
 
 - 📖 **Documentação**: [README Completo](README_LEGADO.md)
-- 🐛 **Issues**: [GitHub Issues](https://github.com/phdiniiz/comercialHours/issues)
-- 💬 **Discussões**: [GitHub Discussions](https://github.com/phdiniiz/comercialHours/discussions)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/phdiniiz/comercialTime/issues)
+- 💬 **Discussões**: [GitHub Discussions](https://github.com/phdiniiz/comercialTime/discussions)
 
 ---
 
@@ -447,6 +447,6 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 **⭐ Se este projeto foi útil para você, considere dar uma estrela!**
 
-[![GitHub stars](https://img.shields.io/github/stars/phdiniiz/comercialHours?style=social)](https://github.com/phdiniiz/comercialHours)
+[![GitHub stars](https://img.shields.io/github/stars/phdiniiz/comercialTime?style=social)](https://github.com/phdiniiz/comercialTime)
 
 </div>
