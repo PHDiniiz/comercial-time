@@ -1,8 +1,8 @@
-# @phdiniiz/comercialTime
+# @phdiniiz/comercial-time
 
 <div align="center">
 
-[![npm version](https://badge.fury.io/js/%40phdiniiz%2FcomercialTime.svg)](https://badge.fury.io/js/%40phdiniiz%2FcomercialTime)
+[![npm version](https://badge.fury.io/js/%40phdiniiz%2Fcomercial-time.svg)](https://badge.fury.io/js/%40phdiniiz%2Fcomercial-time)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D22.0.0-brightgreen.svg)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7.2-blue.svg)](https://www.typescriptlang.org/)
@@ -17,7 +17,7 @@ Uma solução robusta e performática para controle de horários comerciais, fer
 
 ## 📋 Sobre o Projeto
 
-**@phdiniiz/comercialTime** é uma biblioteca completa para gerenciamento de horários comerciais em português brasileiro, desenvolvida com foco em performance, segurança e facilidade de uso.
+**@phdiniiz/comercial-time** é uma biblioteca completa para gerenciamento de horários comerciais em português brasileiro, desenvolvida com foco em performance, segurança e facilidade de uso.
 
 ### 🎯 **O que realiza?**
 - **Gerenciamento de horários comerciais** com suporte completo ao português brasileiro
@@ -76,19 +76,19 @@ Uma solução robusta e performática para controle de horários comerciais, fer
 
 ```bash
 # Usando pnpm (recomendado)
-pnpm add @phdiniiz/comercialTime
+pnpm add @phdiniiz/comercial-time
 
 # Usando npm
-npm install @phdiniiz/comercialTime
+npm install @phdiniiz/comercial-time
 
 # Usando yarn
-yarn add @phdiniiz/comercialTime
+yarn add @phdiniiz/comercial-time
 ```
 
 ## ⚡ Quick Start
 
 ```typescript
-import { HorarioComercial, inicializarRapido } from '@phdiniiz/comercialTime';
+import { HorarioComercial, inicializarRapido } from '@phdiniiz/comercial-time';
 
 // 1. Inicializar o módulo
 await inicializarRapido('America/Sao_Paulo');
@@ -113,7 +113,7 @@ console.log('Minutos restantes:', horario.minutosRestantesHoje());
 
 ### 🇧🇷 **Brasil (pt-BR)**
 ```typescript
-import { incluir } from "@phdiniiz/comercialTime";
+import { incluir } from "@phdiniiz/comercial-time";
 
 // Feriados nacionais + estaduais de SP
 const horarioBrasil = incluir({ 
@@ -291,7 +291,7 @@ pnpm test -- --watch
 
 ### 🏢 **Aplicação Empresarial**
 ```typescript
-import { HorarioComercial, incluir } from '@phdiniiz/comercialTime';
+import { HorarioComercial, incluir } from '@phdiniiz/comercial-time';
 
 // Configurar horário comercial com feriados
 const horarioCompleto = incluir({ 
@@ -316,7 +316,7 @@ console.log('Feriados:', horario.obterFeriados().length);
 ### 🌐 **API REST**
 ```typescript
 import express from 'express';
-import { HorarioComercial } from '@phdiniiz/comercialTime';
+import { HorarioComercial } from '@phdiniiz/comercial-time';
 
 const app = express();
 const horario = new HorarioComercial({
@@ -337,7 +337,7 @@ app.get('/status', (req, res) => {
 ### ⚛️ **React Hook**
 ```typescript
 import { useState, useEffect } from 'react';
-import { HorarioComercial } from '@phdiniiz/comercialTime';
+import { HorarioComercial } from '@phdiniiz/comercial-time';
 
 export function useHorarioComercial() {
   const [horario] = useState(() => new HorarioComercial({
@@ -404,13 +404,13 @@ Contribuições são sempre bem-vindas! Veja como você pode ajudar:
 <div align="center">
 
 ### 📈 **Métricas**
-![GitHub stars](https://img.shields.io/github/stars/phdiniiz/comercialTime?style=social)
-![GitHub forks](https://img.shields.io/github/forks/phdiniiz/comercialTime?style=social)
-![GitHub issues](https://img.shields.io/github/issues/phdiniiz/comercialTime)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/phdiniiz/comercialTime)
+![GitHub stars](https://img.shields.io/github/stars/phdiniiz/comercial-time?style=social)
+![GitHub forks](https://img.shields.io/github/forks/phdiniiz/comercial-time?style=social)
+![GitHub issues](https://img.shields.io/github/issues/phdiniiz/comercial-time)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/phdiniiz/comercial-time)
 
 ### 🏆 **Badges**
-[![npm version](https://badge.fury.io/js/%40phdiniiz%2FcomercialTime.svg)](https://badge.fury.io/js/%40phdiniiz%2FcomercialTime)
+[![npm version](https://badge.fury.io/js/%40phdiniiz%2Fcomercial-time.svg)](https://badge.fury.io/js/%40phdiniiz%2Fcomercial-time)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D22.0.0-brightgreen.svg)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7.2-blue.svg)](https://www.typescriptlang.org/)
@@ -426,7 +426,7 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 **Pedro Henrique Diniz**
 
 - 🌐 **GitHub**: [@phdiniiz](https://github.com/phdiniiz)
-- 📦 **NPM**: [@phdiniiz/comercialTime](https://www.npmjs.com/package/@phdiniiz/comercialTime)
+- 📦 **NPM**: [@phdiniiz/comercial-time](https://www.npmjs.com/package/@phdiniiz/comercial-time)
 
 ## 🙏 Agradecimentos
 
@@ -438,8 +438,8 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 ## 📞 Suporte
 
 - 📖 **Documentação**: [README Completo](README_LEGADO.md)
-- 🐛 **Issues**: [GitHub Issues](https://github.com/phdiniiz/comercialTime/issues)
-- 💬 **Discussões**: [GitHub Discussions](https://github.com/phdiniiz/comercialTime/discussions)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/phdiniiz/comercial-time/issues)
+- 💬 **Discussões**: [GitHub Discussions](https://github.com/phdiniiz/comercial-time/discussions)
 
 ---
 
@@ -447,6 +447,6 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 **⭐ Se este projeto foi útil para você, considere dar uma estrela!**
 
-[![GitHub stars](https://img.shields.io/github/stars/phdiniiz/comercialTime?style=social)](https://github.com/phdiniiz/comercialTime)
+[![GitHub stars](https://img.shields.io/github/stars/phdiniiz/comercial-time?style=social)](https://github.com/phdiniiz/comercial-time)
 
 </div>

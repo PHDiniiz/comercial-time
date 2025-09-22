@@ -2,9 +2,9 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main, develop, prod ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main, develop, prod ]
 
 env:
   NODE_VERSION: '22'
@@ -178,12 +178,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-  # Job de deploy (apenas para main)
+  # Job de deploy (apenas para prod)
   deploy:
     name: Deploy to NPM
     runs-on: ubuntu-latest
     needs: [test, build, security, quality]
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.ref == 'refs/heads/prod' && github.event_name == 'push'
     
     steps:
       - name: Checkout code

@@ -21,7 +21,7 @@ jobs:
         id: check-merge
         run: |
           # Verificar se é uma branch protegida
-          if [[ "${{ github.base_ref }}" == "main" || "${{ github.base_ref }}" == "develop" ]]; then
+          if [[ "${{ github.base_ref }}" == "main" || "${{ github.base_ref }}" == "develop" || "${{ github.base_ref }}" == "prod" ]]; then
             echo "protected_branch=true" >> $GITHUB_OUTPUT
           else
             echo "protected_branch=false" >> $GITHUB_OUTPUT
@@ -48,7 +48,7 @@ jobs:
           # Verificar se todos os checks obrigatórios passaram
           REQUIRED_CHECKS=("Test & Lint" "Build & Validate" "Security Scan")
 
-          if [[ "${{ github.base_ref }}" == "main" ]]; then
+          if [[ "${{ github.base_ref }}" == "main" || "${{ github.base_ref }}" == "prod" ]]; then
             REQUIRED_CHECKS+=("Code Quality")
           fi
 
@@ -154,12 +154,12 @@ jobs:
               - [ ] Branch deve estar atualizada
               - [ ] Sem conflitos
               
-              ### 🔄 Para branches protegidas (main/develop):
+              ### 🔄 Para branches protegidas (main/develop/prod):
               
               - [ ] **Test & Lint** ✅
               - [ ] **Build & Validate** ✅
               - [ ] **Security Scan** ✅
-              - [ ] **Code Quality** ✅ (apenas para main)
+              - [ ] **Code Quality** ✅ (apenas para main/prod)
               
               ### 🏷️ Labels disponíveis:
               
