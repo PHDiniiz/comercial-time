@@ -1,0 +1,87 @@
+{
+  "name": "@phdiniiz/comercialTime",
+  "version": "1.0.1",
+  "description": "Biblioteca completa para gerenciamento de horários comerciais em português brasileiro. Inclui sistema de feriados nacionais/estaduais, validações de segurança, performance otimizada e suporte a múltiplos países (Brasil, Portugal, EUA). Implementada com Clean Architecture, TypeScript e ESM nativo.",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "dev": "npx tsc --watch",
+    "clean": "rm -rf dist",
+    "build": "npx tsc",
+    "start": "node -e \"console.log('Módulo @phdiniiz/comercialTime compilado com sucesso!'); console.log('Módulo @phdiniiz/comercialTime iniciado com sucesso ✅')\"",
+    "prebuild": "npm run clean",
+    "lint": "echo \"No linter configured\"",
+    "test": "jest --runInBand",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "horario-comercial",
+    "business-hours",
+    "working-hours",
+    "feriados",
+    "holidays",
+    "brasil",
+    "brazil",
+    "portugal",
+    "usa",
+    "typescript",
+    "clean-architecture",
+    "performance",
+    "security",
+    "rate-limiting",
+    "cache",
+    "esm",
+    "nodejs",
+    "react",
+    "nextjs",
+    "nestjs",
+    "express",
+    "api",
+    "rest",
+    "pt-br",
+    "portuguese",
+    "timezone",
+    "agendamento",
+    "scheduling",
+    "calendar",
+    "corporate",
+    "enterprise"
+  ],
+  "author": "Pedro Henrique Diniz - github.com/phdiniz",
+  "license": "MIT",
+  "homepage": "https://github.com/phdiniiz/comercialHours#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phdiniiz/comercialHours.git"
+  },
+  "bugs": {
+    "url": "https://github.com/phdiniiz/comercialHours/issues"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.5.2",
+    "jest": "^30.1.3",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.2"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "CA": [
+    {
+      "nome": "California Admission Day",
+      "data": "2025-09-09",
+      "observacoes": "Commemorates California's admission to the Union in 1850."
+    },
+    {
+      "nome": "Cesar Chavez Day",
+      "data": "2025-03-31",
+      "observacoes": "Honors the labor leader and civil rights activist."
+    }
+  ],
+  "NY": [
+    {
+      "nome": "Evacuation Day",
+      "data": "2025-11-25",
+      "observacoes": "Commemorates the British evacuation of New York City in 1783."
+    }
+  ],
+  "TX": [
+    {
+      "nome": "Texas Independence Day",
+      "data": "2025-03-02",
+      "observacoes": "Commemorates the adoption of the Texas Declaration of Independence."
+    },
+    {
+      "nome": "San Jacinto Day",
+      "data": "2025-04-21",
+      "observacoes": "Commemorates the Battle of San Jacinto."
+    }
+  ],
+  "FL": [
+    {
+      "nome": "Good Friday",
+      "data": "2025-04-18",
+      "observacoes": "Religious holiday observed in Florida."
+    }
+  ],
+  "IL": [
+    {
+      "nome": "Casimir Pulaski Day",
+      "data": "2025-03-03",
+      "observacoes": "Honors the Polish-American Revolutionary War hero."
+    }
+  ],
+  "MA": [
+    {
+      "nome": "Patriots' Day",
+      "data": "2025-04-21",
+      "observacoes": "Commemorates the battles of Lexington and Concord."
+    }
+  ],
+  "LA": [
+    {
+      "nome": "Mardi Gras Day",
+      "data": "2025-03-04",
+      "observacoes": "Fat Tuesday celebration in Louisiana."
+    }
+  ],
+  "HI": [
+    {
+      "nome": "Prince Jonah Kuhio Kalanianaole Day",
+      "data": "2025-03-26",
+      "observacoes": "Honors the Hawaiian prince and delegate to Congress."
+    },
+    {
+      "nome": "King Kamehameha Day",
+      "data": "2025-06-11",
+      "observacoes": "Honors King Kamehameha I, founder of the Kingdom of Hawaii."
+    }
+  ],
+  "AK": [
+    {
+      "nome": "Seward's Day",
+      "data": "2025-03-31",
+      "observacoes": "Commemorates the signing of the Alaska Purchase treaty."
+    }
+  ],
+  "NV": [
+    {
+      "nome": "Nevada Day",
+      "data": "2025-10-31",
+      "observacoes": "Commemorates Nevada's admission to the Union in 1864."
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "nome": "New Year's Day",
+    "data": "2025-01-01",
+    "observacoes": "First day of the year."
+  },
+  {
+    "nome": "Martin Luther King Jr. Day",
+    "data": "2025-01-20",
+    "observacoes": "Honors the civil rights leader Martin Luther King Jr."
+  },
+  {
+    "nome": "Presidents' Day",
+    "data": "2025-02-17",
+    "observacoes": "Honors all U.S. presidents, particularly Washington and Lincoln."
+  },
+  {
+    "nome": "Memorial Day",
+    "data": "2025-05-26",
+    "observacoes": "Honors military personnel who died in service."
+  },
+  {
+    "nome": "Independence Day",
+    "data": "2025-07-04",
+    "observacoes": "Celebrates the Declaration of Independence in 1776."
+  },
+  {
+    "nome": "Labor Day",
+    "data": "2025-09-01",
+    "observacoes": "Honors the American labor movement."
+  },
+  {
+    "nome": "Columbus Day",
+    "data": "2025-10-13",
+    "observacoes": "Commemorates Christopher Columbus's arrival in the Americas."
+  },
+  {
+    "nome": "Veterans Day",
+    "data": "2025-11-11",
+    "observacoes": "Honors military veterans who served in the U.S. Armed Forces."
+  },
+  {
+    "nome": "Thanksgiving Day",
+    "data": "2025-11-27",
+    "observacoes": "National day of thanksgiving and harvest celebration."
+  },
+  {
+    "nome": "Christmas Day",
+    "data": "2025-12-25",
+    "observacoes": "Celebrates the birth of Jesus Christ."
+  }
+]

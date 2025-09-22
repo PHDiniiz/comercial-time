@@ -1,0 +1,163 @@
+name: ✨ Feature Request
+description: Sugerir uma nova funcionalidade
+title: "[FEATURE]: "
+labels: ["enhancement", "needs-triage"]
+assignees: ["phdiniiz"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por sugerir uma nova funcionalidade! Por favor, preencha o formulário abaixo com o máximo de detalhes possível.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: ✨ Descrição da Feature
+      description: Descreva claramente a funcionalidade desejada
+      placeholder: Descreva a funcionalidade de forma clara e concisa...
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 🎯 Problema que Resolve
+      description: Descreva o problema que esta feature resolveria
+      placeholder: Descreva o problema ou limitação atual...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: 💡 Solução Proposta
+      description: Descreva a solução que você gostaria de ver implementada
+      placeholder: Descreva como você gostaria que a funcionalidade funcionasse...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 🔄 Alternativas Consideradas
+      description: Descreva outras soluções que você considerou
+      placeholder: Descreva outras abordagens que você considerou...
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 📋 Critérios de Aceitação
+      description: Liste os critérios que devem ser atendidos
+      placeholder: |
+        - [ ] Critério 1
+        - [ ] Critério 2
+        - [ ] Critério 3
+    validations:
+      required: true
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: 💻 Exemplos de Uso
+      description: Adicione exemplos de como a funcionalidade seria usada
+      placeholder: |
+        ```typescript
+        import { HorarioComercial } from '@phdiniiz/comercialTime';
+        
+        // Exemplo de uso da nova funcionalidade
+        const horario = new HorarioComercial({
+          segunda: { abertura: '08:00', fechamento: '18:00' }
+        });
+        
+        // Nova funcionalidade
+        ```
+      render: typescript
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 🚨 Prioridade
+      description: Qual a prioridade desta feature?
+      options:
+        - 🔴 Critical - Essencial para o projeto
+        - 🟠 High - Importante para muitos usuários
+        - 🟡 Medium - Útil para alguns usuários
+        - 🟢 Low - Nice to have
+    validations:
+      required: true
+
+  - type: dropdown
+    id: complexity
+    attributes:
+      label: 🧩 Complexidade
+      description: Qual a complexidade estimada?
+      options:
+        - 🟢 Simple - Mudanças menores
+        - 🟡 Moderate - Mudanças moderadas
+        - 🔴 Complex - Mudanças significativas
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: breaking
+    attributes:
+      label: 💥 Breaking Changes
+      description: Esta feature introduz breaking changes?
+      options:
+        - label: Sim, introduz breaking changes
+        - label: Não, é backward compatible
+        - label: Não tenho certeza
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: 📊 Impacto
+      description: Descreva o impacto desta feature
+      placeholder: |
+        - Quantos usuários seriam beneficiados?
+        - Qual o impacto na performance?
+        - Há impacto na segurança?
+
+  - type: textarea
+    id: documentation
+    attributes:
+      label: 📚 Documentação
+      description: Que documentação seria necessária?
+      placeholder: |
+        - README atualizado
+        - Exemplos de uso
+        - Documentação da API
+        - Guias de migração
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: ✅ Checklist
+      description: Verifique os itens que se aplicam
+      options:
+        - label: Já verifiquei se existe uma issue similar
+          required: true
+        - label: Já verifiquei a documentação atual
+          required: true
+        - label: Já considerei alternativas
+          required: true
+        - label: Já verifiquei se é tecnicamente viável
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 📋 Informações Adicionais
+      description: Qualquer informação adicional relevante
+      placeholder: Adicione qualquer informação adicional que possa ajudar...
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 📸 Mockups/Exemplos
+        
+        Se aplicável, adicione mockups ou exemplos visuais.
+        
+        ## 🔗 Links Relacionados
+        
+        Links para issues, PRs ou discussões relacionadas.

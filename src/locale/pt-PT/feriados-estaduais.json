@@ -1,0 +1,72 @@
+{
+  "LIS": [
+    {
+      "nome": "Dia de Santo António",
+      "data": "2025-06-13",
+      "observacoes": "Padroeiro de Lisboa."
+    }
+  ],
+  "POR": [
+    {
+      "nome": "Dia de São João",
+      "data": "2025-06-24",
+      "observacoes": "Padroeiro do Porto."
+    }
+  ],
+  "BRA": [
+    {
+      "nome": "Dia de São Bartolomeu",
+      "data": "2025-08-24",
+      "observacoes": "Padroeiro de Braga."
+    }
+  ],
+  "COI": [
+    {
+      "nome": "Dia de Rainha Santa Isabel",
+      "data": "2025-07-04",
+      "observacoes": "Padroeira de Coimbra."
+    }
+  ],
+  "AVE": [
+    {
+      "nome": "Dia de São Gonçalo",
+      "data": "2025-01-10",
+      "observacoes": "Padroeiro de Aveiro."
+    }
+  ],
+  "SET": [
+    {
+      "nome": "Dia de São Julião",
+      "data": "2025-01-27",
+      "observacoes": "Padroeiro de Setúbal."
+    }
+  ],
+  "FAR": [
+    {
+      "nome": "Dia de Santa Maria",
+      "data": "2025-08-15",
+      "observacoes": "Padroeira de Faro."
+    }
+  ],
+  "LEI": [
+    {
+      "nome": "Dia de São Martinho",
+      "data": "2025-11-11",
+      "observacoes": "Padroeiro de Leiria."
+    }
+  ],
+  "VSE": [
+    {
+      "nome": "Dia de São Teotónio",
+      "data": "2025-07-18",
+      "observacoes": "Padroeiro de Viseu."
+    }
+  ],
+  "GUA": [
+    {
+      "nome": "Dia de Nossa Senhora da Consolação",
+      "data": "2025-08-15",
+      "observacoes": "Padroeira de Guarda."
+    }
+  ]
+}

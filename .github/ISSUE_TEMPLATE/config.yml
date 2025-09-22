@@ -1,0 +1,17 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 GitHub Discussions
+    url: https://github.com/phdiniiz/comercialHours/discussions
+    about: Use para discussões gerais, dúvidas e ideias
+  - name: 📚 Documentação
+    url: https://github.com/phdiniiz/comercialHours/blob/main/README_LEGADO.md
+    about: Consulte a documentação completa do projeto
+  - name: 🐛 Bug Report
+    url: https://github.com/phdiniiz/comercialHours/issues/new?template=bug_report.yml
+    about: Reportar um bug ou problema
+  - name: ✨ Feature Request
+    url: https://github.com/phdiniiz/comercialHours/issues/new?template=feature_request.yml
+    about: Sugerir uma nova funcionalidade
+  - name: ❓ Question
+    url: https://github.com/phdiniiz/comercialHours/issues/new?template=question.yml
+    about: Fazer uma pergunta ou dúvida

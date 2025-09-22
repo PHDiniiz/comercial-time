@@ -1,0 +1,52 @@
+[
+  {
+    "nome": "Dia de Ano Novo",
+    "data": "2025-01-01",
+    "observacoes": "Primeiro dia do ano civil."
+  },
+  {
+    "nome": "Dia da Liberdade",
+    "data": "2025-04-25",
+    "observacoes": "Revolução dos Cravos - fim da ditadura em Portugal."
+  },
+  {
+    "nome": "Dia do Trabalhador",
+    "data": "2025-05-01",
+    "observacoes": "Dia Internacional do Trabalhador."
+  },
+  {
+    "nome": "Dia de Portugal, de Camões e das Comunidades Portuguesas",
+    "data": "2025-06-10",
+    "observacoes": "Feriado nacional de Portugal."
+  },
+  {
+    "nome": "Assunção de Nossa Senhora",
+    "data": "2025-08-15",
+    "observacoes": "Feriado religioso católico."
+  },
+  {
+    "nome": "Implantação da República",
+    "data": "2025-10-05",
+    "observacoes": "Proclamação da República Portuguesa em 1910."
+  },
+  {
+    "nome": "Dia de Todos os Santos",
+    "data": "2025-11-01",
+    "observacoes": "Feriado religioso católico."
+  },
+  {
+    "nome": "Restauração da Independência",
+    "data": "2025-12-01",
+    "observacoes": "Restauração da independência de Portugal em 1640."
+  },
+  {
+    "nome": "Imaculada Conceição",
+    "data": "2025-12-08",
+    "observacoes": "Feriado religioso católico."
+  },
+  {
+    "nome": "Dia de Natal",
+    "data": "2025-12-25",
+    "observacoes": "Celebração do nascimento de Jesus Cristo."
+  }
+]

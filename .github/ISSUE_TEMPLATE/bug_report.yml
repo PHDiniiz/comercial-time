@@ -1,0 +1,164 @@
+name: 🐛 Bug Report
+description: Reportar um bug ou problema
+title: "[BUG]: "
+labels: ["bug", "needs-triage"]
+assignees: ["phdiniiz"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por reportar um bug! Por favor, preencha o formulário abaixo com o máximo de detalhes possível.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 🐛 Descrição do Bug
+      description: Descreva claramente o que está acontecendo
+      placeholder: Descreva o bug de forma clara e concisa...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 🔄 Passos para Reproduzir
+      description: Lista os passos para reproduzir o comportamento
+      placeholder: |
+        1. Vá para '...'
+        2. Clique em '...'
+        3. Role para baixo até '...'
+        4. Veja o erro
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: ✅ Comportamento Esperado
+      description: Descreva o que deveria acontecer
+      placeholder: Descreva o comportamento esperado...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: ❌ Comportamento Atual
+      description: Descreva o que está acontecendo
+      placeholder: Descreva o comportamento atual...
+    validations:
+      required: true
+
+  - type: textarea
+    id: code
+    attributes:
+      label: 💻 Código de Exemplo
+      description: Adicione um exemplo de código que reproduz o problema
+      placeholder: |
+        ```typescript
+        import { HorarioComercial } from '@phdiniiz/comercialTime';
+        
+        const horario = new HorarioComercial({
+          segunda: { abertura: '08:00', fechamento: '18:00' }
+        });
+        
+        // Código que reproduz o bug
+        ```
+      render: typescript
+
+  - type: textarea
+    id: error
+    attributes:
+      label: 🚨 Mensagem de Erro
+      description: Cole a mensagem de erro completa
+      placeholder: Cole a mensagem de erro aqui...
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: 🚨 Severidade
+      description: Qual a severidade deste bug?
+      options:
+        - 🔴 Critical - Quebra funcionalidade principal
+        - 🟠 High - Afeta funcionalidade importante
+        - 🟡 Medium - Afeta funcionalidade secundária
+        - 🟢 Low - Problema menor ou cosmético
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: 📦 Versão do Pacote
+      description: Qual versão do pacote você está usando?
+      placeholder: ex: 1.0.0
+    validations:
+      required: true
+
+  - type: input
+    id: node
+    attributes:
+      label: 🟢 Versão do Node.js
+      description: Qual versão do Node.js você está usando?
+      placeholder: ex: 22.0.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: 🖥️ Sistema Operacional
+      description: Em qual sistema operacional o bug ocorre?
+      options:
+        - Windows 10/11
+        - macOS 12.0+
+        - Ubuntu 20.04+
+        - Ubuntu 22.04+
+        - CentOS 8+
+        - Outro
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 🌍 Ambiente
+      description: Descreva seu ambiente de desenvolvimento
+      placeholder: |
+        - Editor: VS Code
+        - Package Manager: pnpm
+        - TypeScript: 5.7.2
+        - Outras informações relevantes...
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: ✅ Checklist
+      description: Verifique os itens que se aplicam
+      options:
+        - label: Já verifiquei se existe uma issue similar
+          required: true
+        - label: Já verifiquei a documentação
+          required: true
+        - label: Já tentei atualizar para a versão mais recente
+          required: true
+        - label: Já verifiquei se o problema persiste em um ambiente limpo
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 📋 Informações Adicionais
+      description: Qualquer informação adicional relevante
+      placeholder: Adicione qualquer informação adicional que possa ajudar...
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 📸 Screenshots
+        
+        Se aplicável, adicione screenshots para ajudar a explicar o problema.
+        
+        ## 🔍 Logs
+        
+        Se aplicável, adicione logs relevantes.

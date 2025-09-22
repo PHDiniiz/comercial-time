@@ -1,0 +1,129 @@
+name: ❓ Question
+description: Fazer uma pergunta ou dúvida
+title: "[QUESTION]: "
+labels: ["question", "needs-triage"]
+assignees: ["phdiniiz"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por sua pergunta! Por favor, preencha o formulário abaixo com o máximo de detalhes possível.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: ❓ Sua Pergunta
+      description: Descreva claramente sua pergunta ou dúvida
+      placeholder: Descreva sua pergunta de forma clara e concisa...
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: 📋 Contexto
+      description: Forneça contexto sobre sua pergunta
+      placeholder: Descreva o contexto em que sua pergunta se encaixa...
+    validations:
+      required: true
+
+  - type: textarea
+    id: code
+    attributes:
+      label: 💻 Código Relacionado
+      description: Se aplicável, adicione código relacionado à sua pergunta
+      placeholder: |
+        ```typescript
+        import { HorarioComercial } from '@phdiniiz/comercialTime';
+        
+        // Código relacionado à sua pergunta
+        ```
+      render: typescript
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: 📂 Categoria
+      description: Em qual categoria sua pergunta se encaixa?
+      options:
+        - 🚀 Instalação e Configuração
+        - 💻 Uso da API
+        - 🐛 Problema Técnico
+        - 📚 Documentação
+        - 🔧 Integração
+        - ⚡ Performance
+        - 🔒 Segurança
+        - 🧪 Testes
+        - 🚀 Deploy
+        - Outro
+    validations:
+      required: true
+
+  - type: dropdown
+    id: urgency
+    attributes:
+      label: ⏰ Urgência
+      description: Qual a urgência da sua pergunta?
+      options:
+        - 🔴 Urgent - Preciso de resposta imediata
+        - 🟠 High - Preciso de resposta em breve
+        - 🟡 Medium - Posso aguardar alguns dias
+        - 🟢 Low - Não há pressa
+    validations:
+      required: true
+
+  - type: textarea
+    id: research
+    attributes:
+      label: 🔍 Pesquisa Realizada
+      description: Descreva o que você já tentou ou pesquisou
+      placeholder: |
+        - Já verifiquei a documentação
+        - Já tentei buscar em issues similares
+        - Já testei algumas soluções
+        - Outras tentativas...
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 🌍 Ambiente
+      description: Descreva seu ambiente de desenvolvimento
+      placeholder: |
+        - OS: Windows 10
+        - Node.js: 22.0.0
+        - Versão do pacote: 1.0.0
+        - Editor: VS Code
+        - Outras informações relevantes...
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: ✅ Checklist
+      description: Verifique os itens que se aplicam
+      options:
+        - label: Já verifiquei a documentação
+          required: true
+        - label: Já verifiquei se existe uma issue similar
+          required: true
+        - label: Já tentei buscar na web
+          required: true
+        - label: Já tentei algumas soluções
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 📋 Informações Adicionais
+      description: Qualquer informação adicional relevante
+      placeholder: Adicione qualquer informação adicional que possa ajudar...
+
+  - type: markdown
+    attributes:
+      value: |
+        ## 📸 Screenshots
+        
+        Se aplicável, adicione screenshots para ajudar a explicar sua pergunta.
+        
+        ## 🔗 Links Relacionados
+        
+        Links para documentação, issues ou recursos relacionados.

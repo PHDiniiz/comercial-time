@@ -1,0 +1,55 @@
+name: Auto Merge
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    
+    steps:
+      - name: Check if PR is ready for auto-merge
+        id: check-pr
+        run: |
+          # Verificar se o PR tem a label "auto-merge"
+          if [[ "${{ github.event.pull_request.labels.*.name }}" == *"auto-merge"* ]]; then
+            echo "ready=true" >> $GITHUB_OUTPUT
+          else
+            echo "ready=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Auto merge PR
+        if: steps.check-pr.outputs.ready == 'true'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { owner, repo, number } = context.issue;
+            
+            // Verificar se todos os checks passaram
+            const { data: checks } = await github.rest.checks.listForRef({
+              owner,
+              repo,
+              ref: context.payload.pull_request.head.sha
+            });
+            
+            const allChecksPassed = checks.check_runs.every(check => 
+              check.status === 'completed' && check.conclusion === 'success'
+            );
+            
+            if (allChecksPassed) {
+              // Fazer merge automático
+              await github.rest.pulls.merge({
+                owner,
+                repo,
+                pull_number: number,
+                merge_method: 'squash',
+                commit_title: `Merge PR #${number}: ${{ github.event.pull_request.title }}`,
+                commit_message: `Automatically merged PR #${number}\n\n${{ github.event.pull_request.body }}`
+              });
+              
+              console.log(`✅ PR #${number} merged successfully`);
+            } else {
+              console.log(`⏳ PR #${number} is not ready for merge - waiting for checks to pass`);
+            }

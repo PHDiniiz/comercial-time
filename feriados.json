@@ -1,0 +1,56 @@
+[
+  {
+    "nome": "Confraternização Universal",
+    "data": "2025-01-01",
+    "observacoes": "Início do ano civil.",
+    "jaPassou": false
+  },
+  {
+    "nome": "Tiradentes",
+    "data": "2025-04-21",
+    "observacoes": "Em homenagem ao mártir da Inconfidência Mineira Joaquim José da Silva Xavier, o Tiradentes.",
+    "jaPassou": false
+  },
+  {
+    "nome": "Dia do Trabalhador",
+    "data": "2025-05-01",
+    "observacoes": "Homenagem a todos os trabalhadores.",
+    "jaPassou": false
+  },
+  {
+    "nome": "Dia da Pátria (Independência do Brasil) (Data Magna Nacional)",
+    "data": "2025-09-07",
+    "observacoes": "Proclamação da Independência em relação a Portugal.",
+    "jaPassou": false
+  },
+  {
+    "nome": "Nossa Senhora Aparecida",
+    "data": "2025-10-12",
+    "observacoes": "Padroeira do Brasil.",
+    "jaPassou": false
+  },
+  {
+    "nome": "Finados",
+    "data": "2025-11-02",
+    "observacoes": "Dia em memória aos mortos.",
+    "jaPassou": false
+  },
+  {
+    "nome": "Proclamação da República",
+    "data": "2025-11-15",
+    "observacoes": "Transformação do Império em República.",
+    "jaPassou": false
+  },
+  {
+    "nome": "Dia Nacional de Zumbi e da Consciência Negra",
+    "data": "2025-11-20",
+    "observacoes": "Data da Morte de Zumbi dos Palmares.",
+    "jaPassou": false
+  },
+  {
+    "nome": "Natal",
+    "data": "2025-12-25",
+    "observacoes": "Celebração do nascimento de Jesus.",
+    "jaPassou": false
+  }
+]

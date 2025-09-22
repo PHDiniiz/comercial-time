@@ -1,0 +1,83 @@
+# Code Owners
+# Este arquivo define quem são os responsáveis por diferentes partes do código
+# e quem deve revisar Pull Requests que afetam essas áreas.
+
+# Mantenedor principal - responsável por todo o projeto
+* @phdiniiz
+
+# Arquivos de configuração e build
+package.json @phdiniiz
+package-lock.json @phdiniiz
+pnpm-lock.yaml @phdiniiz
+tsconfig.json @phdiniiz
+jest.config.js @phdiniiz
+
+# Documentação principal
+README.md @phdiniiz
+README_LEGADO.md @phdiniiz
+NPM.md @phdiniiz
+GitHub.md @phdiniiz
+LICENSE @phdiniiz
+
+# Documentação técnica
+docs/ @phdiniiz
+examples/ @phdiniiz
+
+# Configurações do GitHub
+.github/ @phdiniiz
+
+# Código fonte principal
+src/ @phdiniiz
+
+# Testes
+tests/ @phdiniiz
+test-*.js @phdiniiz
+
+# Arquivos de configuração de ambiente
+.env.example @phdiniiz
+.env @phdiniiz
+
+# Arquivos de dados
+feriados.json @phdiniiz
+src/locale/ @phdiniiz
+
+# Arquivos de build
+dist/ @phdiniiz
+
+# Arquivos de segurança
+src/security/ @phdiniiz
+
+# Arquivos de performance
+src/performance/ @phdiniiz
+
+# Arquivos de cronjob
+src/cronjob/ @phdiniiz
+
+# Arquivos de infraestrutura
+src/infrastructure/ @phdiniiz
+
+# Arquivos de aplicação
+src/application/ @phdiniiz
+
+# Arquivos de domínio
+src/domain/ @phdiniiz
+
+# Arquivos de apresentação
+src/presentation/ @phdiniiz
+
+# Arquivos de configuração
+src/config/ @phdiniiz
+
+# Arquivos de core
+src/core/ @phdiniiz
+
+# Arquivos de lib
+src/lib/ @phdiniiz
+
+# Arquivos de legacy
+src/legacy/ @phdiniiz
+
+# Arquivos principais
+src/index.ts @phdiniiz
+src/index.cjs.ts @phdiniiz
+src/comercial-time.ts @phdiniiz

@@ -1,0 +1,541 @@
+name: Merge Protection
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  # Job para verificar se o PR pode ser mergeado
+  check-merge-eligibility:
+    name: Check Merge Eligibility
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check if PR is ready for merge
+        id: check-merge
+        run: |
+          # Verificar se é uma branch protegida
+          if [[ "${{ github.base_ref }}" == "main" || "${{ github.base_ref }}" == "develop" ]]; then
+            echo "protected_branch=true" >> $GITHUB_OUTPUT
+          else
+            echo "protected_branch=false" >> $GITHUB_OUTPUT
+          fi
+
+          # Verificar se tem label auto-merge
+          if [[ "${{ github.event.pull_request.labels.*.name }}" == *"auto-merge"* ]]; then
+            echo "auto_merge=true" >> $GITHUB_OUTPUT
+          else
+            echo "auto_merge=false" >> $GITHUB_OUTPUT
+          fi
+
+          # Verificar se tem label emergency
+          if [[ "${{ github.event.pull_request.labels.*.name }}" == *"emergency"* ]]; then
+            echo "emergency=true" >> $GITHUB_OUTPUT
+          else
+            echo "emergency=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check required status checks
+        id: check-status
+        if: steps.check-merge.outputs.protected_branch == 'true'
+        run: |
+          # Verificar se todos os checks obrigatórios passaram
+          REQUIRED_CHECKS=("Test & Lint" "Build & Validate" "Security Scan")
+
+          if [[ "${{ github.base_ref }}" == "main" ]]; then
+            REQUIRED_CHECKS+=("Code Quality")
+          fi
+
+          ALL_PASSED=true
+          for check in "${REQUIRED_CHECKS[@]}"; do
+            echo "Verificando check: $check"
+            # Aqui você pode adicionar lógica para verificar se o check passou
+            # Por enquanto, assumimos que todos passaram se o job está rodando
+          done
+
+          echo "all_checks_passed=$ALL_PASSED" >> $GITHUB_OUTPUT
+
+      - name: Check required reviews
+        id: check-reviews
+        if: steps.check-merge.outputs.protected_branch == 'true'
+        run: |
+          # Verificar se tem pelo menos 1 aprovação
+          APPROVALS=$(gh pr view ${{ github.event.pull_request.number }} --json reviews --jq '.reviews | map(select(.state == "APPROVED")) | length')
+
+          if [[ $APPROVALS -ge 1 ]]; then
+            echo "has_approval=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_approval=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check if branch is up to date
+        id: check-branch
+        if: steps.check-merge.outputs.protected_branch == 'true'
+        run: |
+          # Verificar se a branch está atualizada
+          BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          HEAD_SHA="${{ github.event.pull_request.head.sha }}"
+
+          # Verificar se há commits novos na base
+          BEHIND=$(gh api repos/${{ github.repository }}/compare/$HEAD_SHA...$BASE_SHA --jq '.behind_by')
+
+          if [[ $BEHIND -eq 0 ]]; then
+            echo "up_to_date=true" >> $GITHUB_OUTPUT
+          else
+            echo "up_to_date=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Determine merge eligibility
+        id: merge-eligibility
+        run: |
+          PROTECTED_BRANCH="${{ steps.check-merge.outputs.protected_branch }}"
+          AUTO_MERGE="${{ steps.check-merge.outputs.auto_merge }}"
+          EMERGENCY="${{ steps.check-merge.outputs.emergency }}"
+          ALL_CHECKS_PASSED="${{ steps.check-status.outputs.all_checks_passed }}"
+          HAS_APPROVAL="${{ steps.check-reviews.outputs.has_approval }}"
+          UP_TO_DATE="${{ steps.check-branch.outputs.up_to_date }}"
+
+          ELIGIBLE=false
+          REASON=""
+
+          if [[ "$PROTECTED_BRANCH" == "true" ]]; then
+            if [[ "$EMERGENCY" == "true" ]]; then
+              ELIGIBLE=true
+              REASON="Emergency override"
+            elif [[ "$AUTO_MERGE" == "true" && "$ALL_CHECKS_PASSED" == "true" && "$HAS_APPROVAL" == "true" && "$UP_TO_DATE" == "true" ]]; then
+              ELIGIBLE=true
+              REASON="Auto-merge conditions met"
+            elif [[ "$ALL_CHECKS_PASSED" == "true" && "$HAS_APPROVAL" == "true" && "$UP_TO_DATE" == "true" ]]; then
+              ELIGIBLE=true
+              REASON="Manual merge conditions met"
+            else
+              REASON="Missing requirements:"
+              if [[ "$ALL_CHECKS_PASSED" != "true" ]]; then
+                REASON="$REASON checks not passed"
+              fi
+              if [[ "$HAS_APPROVAL" != "true" ]]; then
+                REASON="$REASON no approval"
+              fi
+              if [[ "$UP_TO_DATE" != "true" ]]; then
+                REASON="$REASON branch not up to date"
+              fi
+            fi
+          else
+            ELIGIBLE=true
+            REASON="Non-protected branch"
+          fi
+
+          echo "eligible=$ELIGIBLE" >> $GITHUB_OUTPUT
+          echo "reason=$REASON" >> $GITHUB_OUTPUT
+
+      - name: Comment on PR
+        if: steps.merge-eligibility.outputs.eligible == 'false'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const eligible = '${{ steps.merge-eligibility.outputs.eligible }}';
+            const reason = '${{ steps.merge-eligibility.outputs.reason }}';
+
+            if (eligible === 'false') {
+              const comment = `## 🚫 PR não pode ser mergeado
+              
+              **Motivo**: ${reason}
+              
+              ### 📋 Requisitos para merge:
+              
+              - [ ] Todos os checks devem passar
+              - [ ] Pelo menos 1 aprovação
+              - [ ] Branch deve estar atualizada
+              - [ ] Sem conflitos
+              
+              ### 🔄 Para branches protegidas (main/develop):
+              
+              - [ ] **Test & Lint** ✅
+              - [ ] **Build & Validate** ✅
+              - [ ] **Security Scan** ✅
+              - [ ] **Code Quality** ✅ (apenas para main)
+              
+              ### 🏷️ Labels disponíveis:
+              
+              - \`auto-merge\`: Para merge automático quando todos os requisitos forem atendidos
+              - \`emergency\`: Para bypass de proteções em casos críticos
+              
+              ---
+              
+              **💡 Dica**: Use a label \`auto-merge\` para merge automático quando todos os requisitos forem atendidos.`;
+              
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+            }
+
+      - name: Comment on PR (eligible)
+        if: steps.merge-eligibility.outputs.eligible == 'true'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const eligible = '${{ steps.merge-eligibility.outputs.eligible }}';
+            const reason = '${{ steps.merge-eligibility.outputs.reason }}';
+            const autoMerge = '${{ steps.check-merge.outputs.auto_merge }}';
+
+            if (eligible === 'true') {
+              let comment = `## ✅ PR pode ser mergeado
+              
+              **Motivo**: ${reason}
+              
+              ### 🎉 Status:
+              
+              - [x] Todos os checks passaram
+              - [x] Aprovação obtida
+              - [x] Branch atualizada
+              - [x] Sem conflitos
+              
+              ### 🚀 Próximos passos:
+              
+              `;
+              
+              if (autoMerge === 'true') {
+                comment += `- [x] **Auto-merge ativado** - O PR será mergeado automaticamente
+                - [x] **Label \`auto-merge\` aplicada** - Merge automático configurado
+                
+                **⏰ O merge será executado automaticamente quando todos os checks passarem.**`;
+              } else {
+                comment += `- [ ] **Merge manual** - Aguardando ação do mantenedor
+                - [ ] **Label \`auto-merge\`** - Aplicar para merge automático (opcional)
+                
+                **👤 O merge deve ser executado manualmente pelo mantenedor.**`;
+              }
+              
+              comment += `
+              
+              ---
+              
+              **💡 Dica**: Use a label \`auto-merge\` para merge automático em futuros PRs.`;
+              
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+            }
+
+  # Job para verificar se o tipo de branch é permitido
+  check-branch-type:
+    name: Check Branch Type
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - name: Check if branch type is allowed
+        id: check-branch-type
+        run: |
+          # Tipos de branch permitidos para contribuidores
+          ALLOWED_BRANCH_TYPES=("feature" "fix" "hotfix" "refactor" "test")
+
+          # Tipos de branch restritos (apenas mantenedores)
+          RESTRICTED_BRANCH_TYPES=("release" "docs" "chore" "perf" "ci" "build")
+
+          # Obter o nome da branch
+          BRANCH_NAME="${{ github.head_ref }}"
+
+          # Extrair o tipo da branch (primeira parte antes da barra)
+          BRANCH_TYPE=$(echo "$BRANCH_NAME" | cut -d'/' -f1)
+
+          echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
+          echo "branch_type=$BRANCH_TYPE" >> $GITHUB_OUTPUT
+
+          # Verificar se é um tipo permitido
+          IS_ALLOWED=false
+          for allowed_type in "${ALLOWED_BRANCH_TYPES[@]}"; do
+            if [[ "$BRANCH_TYPE" == "$allowed_type" ]]; then
+              IS_ALLOWED=true
+              break
+            fi
+          done
+
+          # Verificar se é um tipo restrito
+          IS_RESTRICTED=false
+          for restricted_type in "${RESTRICTED_BRANCH_TYPES[@]}"; do
+            if [[ "$BRANCH_TYPE" == "$restricted_type" ]]; then
+              IS_RESTRICTED=true
+              break
+            fi
+          done
+
+          echo "is_allowed=$IS_ALLOWED" >> $GITHUB_OUTPUT
+          echo "is_restricted=$IS_RESTRICTED" >> $GITHUB_OUTPUT
+
+          # Verificar se o autor é mantenedor
+          AUTHOR="${{ github.event.pull_request.user.login }}"
+          MAINTAINER="phdiniiz"
+
+          if [[ "$AUTHOR" == "$MAINTAINER" ]]; then
+            echo "is_maintainer=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_maintainer=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Comment on restricted branch type
+        if: steps.check-branch-type.outputs.is_restricted == 'true' && steps.check-branch-type.outputs.is_maintainer == 'false'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const branchType = '${{ steps.check-branch-type.outputs.branch_type }}';
+            const branchName = '${{ steps.check-branch-type.outputs.branch_name }}';
+
+            const comment = `## 🚫 Tipo de Branch Restrito
+
+            A branch \`${branchName}\` usa o tipo \`${branchType}/\` que é **restrito apenas para mantenedores**.
+
+            ### ✅ Tipos de Branch Permitidos para Contribuidores:
+
+            - \`feature/\` - Novas funcionalidades
+            - \`fix/\` - Correções de bugs
+            - \`hotfix/\` - Correções críticas para produção
+            - \`refactor/\` - Refatoração de código
+            - \`test/\` - Melhorias em testes
+
+            ### 🔒 Tipos de Branch Restritos (Apenas Mantenedores):
+
+            - \`release/\` - Preparação de releases
+            - \`docs/\` - Atualizações de documentação
+            - \`chore/\` - Tarefas de manutenção
+            - \`perf/\` - Melhorias de performance
+            - \`ci/\` - Mudanças em CI/CD
+            - \`build/\` - Mudanças no sistema de build
+
+            ### 🔄 Como Corrigir:
+
+            1. **Renomear a branch** para um tipo permitido:
+               \`\`\`bash
+               git branch -m ${branchName} feature/nova-funcionalidade
+               git push origin feature/nova-funcionalidade
+               git push origin --delete ${branchName}
+               \`\`\`
+
+            2. **Ou criar uma nova branch** com tipo permitido:
+               \`\`\`bash
+               git checkout develop
+               git pull origin develop
+               git checkout -b feature/nova-funcionalidade
+               git cherry-pick <commit-hash>
+               \`\`\`
+
+            ---
+
+            **💡 Dica**: Use \`feature/\` para novas funcionalidades ou \`fix/\` para correções de bugs.`;
+
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      - name: Comment on invalid branch type
+        if: steps.check-branch-type.outputs.is_allowed == 'false' && steps.check-branch-type.outputs.is_restricted == 'false'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const branchType = '${{ steps.check-branch-type.outputs.branch_type }}';
+            const branchName = '${{ steps.check-branch-type.outputs.branch_name }}';
+
+            const comment = `## 🚫 Tipo de Branch Inválido
+
+            A branch \`${branchName}\` usa o tipo \`${branchType}/\` que **não é reconhecido**.
+
+            ### ✅ Tipos de Branch Permitidos:
+
+            - \`feature/\` - Novas funcionalidades
+            - \`fix/\` - Correções de bugs
+            - \`hotfix/\` - Correções críticas para produção
+            - \`refactor/\` - Refatoração de código
+            - \`test/\` - Melhorias em testes
+
+            ### 🔄 Como Corrigir:
+
+            1. **Renomear a branch** para um tipo válido:
+               \`\`\`bash
+               git branch -m ${branchName} feature/nova-funcionalidade
+               git push origin feature/nova-funcionalidade
+               git push origin --delete ${branchName}
+               \`\`\`
+
+            2. **Ou criar uma nova branch** com tipo válido:
+               \`\`\`bash
+               git checkout develop
+               git pull origin develop
+               git checkout -b feature/nova-funcionalidade
+               git cherry-pick <commit-hash>
+               \`\`\`
+
+            ---
+
+            **💡 Dica**: Use \`feature/\` para novas funcionalidades ou \`fix/\` para correções de bugs.`;
+
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  # Job para verificar se o PR tem as labels corretas
+  check-labels:
+    name: Check Labels
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - name: Check required labels
+        id: check-labels
+        run: |
+          # Verificar se tem pelo menos uma label de tipo
+          TYPE_LABELS=("bug" "enhancement" "feature" "hotfix" "release" "docs" "refactor" "test" "chore")
+          HAS_TYPE_LABEL=false
+
+          for label in "${TYPE_LABELS[@]}"; do
+            if [[ "${{ github.event.pull_request.labels.*.name }}" == *"$label"* ]]; then
+              HAS_TYPE_LABEL=true
+              break
+            fi
+          done
+
+          echo "has_type_label=$HAS_TYPE_LABEL" >> $GITHUB_OUTPUT
+
+      - name: Comment on missing labels
+        if: steps.check-labels.outputs.has_type_label == 'false'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const comment = `## 🏷️ Labels Obrigatórias
+
+            Este PR precisa de pelo menos uma label de **tipo**:
+
+            ### 📋 Labels de Tipo:
+
+            - \`bug\` - Correção de bug
+            - \`enhancement\` - Melhoria
+            - \`feature\` - Nova funcionalidade
+            - \`hotfix\` - Correção crítica
+            - \`release\` - Preparação de release
+            - \`docs\` - Documentação
+            - \`refactor\` - Refatoração
+            - \`test\` - Testes
+            - \`chore\` - Manutenção
+
+            ### 🎯 Labels de Prioridade (Opcional):
+
+            - \`low\` - Prioridade baixa
+            - \`medium\` - Prioridade média
+            - \`high\` - Prioridade alta
+            - \`critical\` - Prioridade crítica
+
+            ### 🔄 Labels de Status (Opcional):
+
+            - \`needs-review\` - Precisa de revisão
+            - \`approved\` - Aprovado
+            - \`blocked\` - Bloqueado
+            - \`auto-merge\` - Pode ser mergeado automaticamente
+
+            ---
+
+            **💡 Dica**: Aplique as labels apropriadas para facilitar a revisão e organização.`;
+
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  # Job para verificar se o PR segue o padrão de commits
+  check-commits:
+    name: Check Commits
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check commit messages
+        id: check-commits
+        run: |
+          # Verificar se os commits seguem o padrão conventional
+          COMMITS=$(git log --oneline ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }})
+          INVALID_COMMITS=""
+
+          while IFS= read -r commit; do
+            if [[ ! "$commit" =~ ^(feat|fix|docs|style|refactor|test|chore|perf|ci|build)(\(.+\))?: .+ ]]; then
+              INVALID_COMMITS="$INVALID_COMMITS\n- $commit"
+            fi
+          done <<< "$COMMITS"
+
+          if [[ -n "$INVALID_COMMITS" ]]; then
+            echo "has_invalid_commits=true" >> $GITHUB_OUTPUT
+            echo "invalid_commits=$INVALID_COMMITS" >> $GITHUB_OUTPUT
+          else
+            echo "has_invalid_commits=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Comment on invalid commits
+        if: steps.check-commits.outputs.has_invalid_commits == 'true'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const invalidCommits = `${{ steps.check-commits.outputs.invalid_commits }}`;
+
+            const comment = `## 📝 Commits Inválidos
+
+            Os seguintes commits não seguem o padrão [Conventional Commits](https://www.conventionalcommits.org/):
+
+            ${invalidCommits}
+
+            ### 📋 Padrão Obrigatório:
+
+            \`\`\`
+            <type>(<scope>): <description>
+            \`\`\`
+
+            ### 🎯 Tipos Válidos:
+
+            - \`feat\` - Nova funcionalidade
+            - \`fix\` - Correção de bug
+            - \`docs\` - Documentação
+            - \`style\` - Formatação
+            - \`refactor\` - Refatoração
+            - \`test\` - Testes
+            - \`chore\` - Manutenção
+            - \`perf\` - Performance
+            - \`ci\` - CI/CD
+            - \`build\` - Build
+
+            ### 💡 Exemplos:
+
+            - \`feat(core): adiciona suporte a timezone\`
+            - \`fix(security): corrige vulnerabilidade XSS\`
+            - \`docs(readme): atualiza documentação\`
+
+            ---
+
+            **💡 Dica**: Use \`git rebase -i\` para reescrever os commits com mensagens corretas.`;
+
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });

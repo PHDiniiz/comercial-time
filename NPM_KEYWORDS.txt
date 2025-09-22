@@ -1,0 +1,1 @@
+horario-comercial, business-hours, working-hours, feriados, holidays, brasil, brazil, portugal, usa, typescript, clean-architecture, performance, security, rate-limiting, cache, esm, nodejs, react, nextjs, nestjs, express, api, rest, pt-br, portuguese, timezone, agendamento, scheduling, calendar, corporate, enterprise
